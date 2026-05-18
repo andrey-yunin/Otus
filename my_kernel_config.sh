@@ -1,6 +1,6 @@
  #!/bin/bash
 
-# Функции-хелперы в стиле оригинального скрипта
+# Функции-хелперы 
 function disable() {
      echo -e "ОТКЛЮЧЕНИЕ модуля $1"
      ./scripts/config --disable "$1"
@@ -23,33 +23,33 @@ function finalize_config() {
 
 ################ START SCRIPT ####################
 
-echo "=== Настройка конфигурации по презентации 0x02 ==="
+echo "=== Настройка конфигурации  ==="
 
-# 1. Отключение безопасности (Слайды 13-14)
+# 1. Отключение безопасности 
 disable "SECURITY_SELINUX"
 disable "SECURITY_SMACK"
 disable "SECURITY_TOMOYO"
 disable "SECURITY_APPARMOR"
 disable "SECURITY_YAMA"
 
-# 2. Отключение KASLR (Слайд 15)
+# 2. Отключение KASLR 
 disable "RANDOMIZE_BASE"
 
-# 3. Отключение защит процессора и оптимизация (Слайд 16)
+# 3. Отключение защит процессора и оптимизация 
 disable "CPU_MITIGATIONS"
 disable "MITIGATION_SPECTRE_BHI"
 disable "MITIGATION_RFDS"
 disable "PAGE_TABLE_ISOLATION"
 disable "ZSWAP"
 
-# 4. Отключение BPF (Слайд 17)
+# 4. Отключение BPF 
 disable "BPF"
 disable "BPF_SYSCALL"
 disable "BPF_JIT"
 disable "BPF_EVENTS"
 disable "BPFILTER"
 
-# 5. Включение инструментов отладки (Слайды 19-21)
+# 5. Включение инструментов отладки 
 enable "DEBUG_FS"
 enable "FTRACE"
 enable "FUNCTION_TRACER"
@@ -77,7 +77,7 @@ set_val "CONFIG_DEBUG_INFO_DWARF5" "y"
 # Финализация
 finalize_config
 
-# Проверка (как в оригинальном скрипте)
+# Проверка 
 echo -e "\nПроверка критических настроек:"
 grep "CONFIG_DEBUG_INFO" .config
 grep "CONFIG_KASAN" .config
